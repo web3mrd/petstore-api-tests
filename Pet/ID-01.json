@@ -1,0 +1,4 @@
+let response = pm.response.json();
+let petId = response.id;
+pm.collectionVariables.set("petId", petId); // set a variable in a collection
+
