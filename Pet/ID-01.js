@@ -87,3 +87,18 @@ pm.test("Checking the error message", function () {
 pm.test("Request time check", function () {
     pm.expect(pm.response.responseTime).to.be.below(1000);
 });
+
+let requestBody = pm.request.body.raw
+requestBody = JSON.parse(requestBody);
+console.log(requestBody);
+let responseBody = pm.response.json();
+console.log(responseBody);
+pm.test("Comparison of data from the request body in the response body", function(){
+    pm.expect(requestBody.id).to.eql(responseBody.id);
+    pm.expect(requestBody.category.id).to.eql(responseBody.category.id);
+    pm.expect(requestBody.category.name).to.eql(responseBody.category.name);
+    pm.expect(requestBody.name).to.eql(responseBody.name);
+    pm.expect(requestBody.photoUrls).to.eql(responseBody.photoUrls);
+    pm.expect(requestBody.tags).to.eql(responseBody.tags);
+    pm.expect(requestBody.status).to.eql(responseBody.status);
+});
