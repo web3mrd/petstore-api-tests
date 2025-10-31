@@ -2,3 +2,57 @@ let response = pm.response.json();
 let petId = response.id;
 pm.collectionVariables.set("petId", petId); // set a variable in a collection
 
+pm.test("JSON schema validation", function () {
+    let schemaPet = {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "category": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": ["id", "name"]
+            },
+            "name": {
+                "type": "string",
+                "example": "doggie"
+            },
+            "photoUrls": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "minItems": 1
+            },
+            "tags": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["id", "name"]
+                }
+            },
+            "status": {
+                "type": "string",
+                "enum": ["available", "pending", "sold"]
+            }
+        },
+        "required": ["name", "photoUrls"]
+    };
+    pm.response.to.have.jsonSchema(schemaPet); // Let's check if the response matches our JSON schema
+});
