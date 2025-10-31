@@ -73,3 +73,13 @@ pm.expect(pm.response.headers.get("Access-Control-Allow-Methods")).to.eql("GET, 
 pm.expect(pm.response.headers.get("Access-Control-Allow-Headers")).to.eql("Content-Type, api_key, Authorization");
 pm.expect(pm.response.headers.get("Server")).to.eql("Jetty(9.2.9.v20150224)");
 });
+
+pm.test("Status code 200 or 405", function(){
+    pm.expect(pm.response.code).to.be.oneOf([200,405]);
+});
+
+pm.test("Checking the error message", function(){
+    if (pm.response.code == 405) {
+        pm.expect(response.massage).to.eql("Invalid input")
+    };
+});
