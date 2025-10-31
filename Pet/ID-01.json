@@ -54,5 +54,13 @@ pm.test("JSON schema validation", function () {
         },
         "required": ["name", "photoUrls"]
     };
-    pm.response.to.have.jsonSchema(schemaPet); // Let's check if the response matches our JSON schema
+    pm.response.to.have.jsonSchema(schemaPet);
+});
+
+pm.test("Checking values in request headers", function(){
+pm.expect(pm.request.headers.get("accept")).to.eql("application/json");
+pm.expect(pm.request.headers.get("Content-Type")).to.eql("application/json");
+pm.expect(pm.request.headers.get("Cache-Control")).to.eql("no-cache");
+pm.expect(pm.request.headers.get("Host")).to.eql("petstore.swagger.io");
+pm.expect(pm.request.headers.get("Connection")).to.eql("keep-alive");
 });
