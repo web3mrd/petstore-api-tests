@@ -1,6 +1,6 @@
 let response = pm.response.json();
 let petId = response.id;
-pm.collectionVariables.set("petId", petId); // set a variable in a collection
+pm.collectionVariables.set("petId", petId);
 
 pm.test("JSON schema validation", function () {
     let schemaPet = {
@@ -90,9 +90,7 @@ pm.test("Request time check", function () {
 
 let requestBody = pm.request.body.raw
 requestBody = JSON.parse(requestBody);
-console.log(requestBody);
 let responseBody = pm.response.json();
-console.log(responseBody);
 pm.test("Comparison of data from the request body in the response body", function(){
     pm.expect(requestBody.id).to.eql(responseBody.id);
     pm.expect(requestBody.category.id).to.eql(responseBody.category.id);
