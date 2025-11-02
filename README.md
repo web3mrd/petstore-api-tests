@@ -22,17 +22,19 @@ Each test file corresponds to a specific test case ID from the checklist below.
 ``` 
 petstore-api-tests/
 │
-├── petstore-api-tests.postman_collection.json # Postman collection
-│
 ├── Pet/
-│ ├── ID-01.js # Example test for the Pet module
-│ └── ...
+│   ├── ID-01.js       # Example test for the Pet module
+│   └── ...
 │
 ├── Store/
-│ └── ...
+│   └── ...
 │
-└── User/
-└── ...
+├── User/
+│   └── ...
+│
+├── README.md         
+│
+└── petstore-api-tests.postman_collection.json  # Postman collection
 ```
 Each `ID-XX.js` file corresponds to a test case ID from the checklist.
 
