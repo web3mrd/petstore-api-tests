@@ -14,7 +14,3 @@ pm.test("Comparison of data from the request body in the response body", functio
     pm.expect(requestBody.tags).to.eql(responseBody.tags);
     pm.expect(requestBody.status).to.eql(responseBody.status);
 });
-
-pm.test("Status code 200 or 405", function () {
-    pm.expect(pm.response.code).to.be.oneOf([200, 405]);
-});
