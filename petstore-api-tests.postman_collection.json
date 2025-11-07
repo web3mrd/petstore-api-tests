@@ -21,92 +21,6 @@
 									"let petId = response.id;",
 									"pm.collectionVariables.set(\"petId\", petId);",
 									"",
-									"pm.test(\"JSON schema validation\", function () {",
-									"    let schemaPet = {",
-									"        \"type\": \"object\",",
-									"        \"properties\": {",
-									"            \"id\": {",
-									"                \"type\": \"integer\"",
-									"            },",
-									"            \"category\": {",
-									"                \"type\": \"object\",",
-									"                \"properties\": {",
-									"                    \"id\": {",
-									"                        \"type\": \"integer\"",
-									"                    },",
-									"                    \"name\": {",
-									"                        \"type\": \"string\"",
-									"                    }",
-									"                },",
-									"                \"required\": [\"id\", \"name\"]",
-									"            },",
-									"            \"name\": {",
-									"                \"type\": \"string\",",
-									"                \"example\": \"doggie\"",
-									"            },",
-									"            \"photoUrls\": {",
-									"                \"type\": \"array\",",
-									"                \"items\": {",
-									"                    \"type\": \"string\"",
-									"                },",
-									"                \"minItems\": 1",
-									"            },",
-									"            \"tags\": {",
-									"                \"type\": \"array\",",
-									"                \"items\": {",
-									"                    \"type\": \"object\",",
-									"                    \"properties\": {",
-									"                        \"id\": {",
-									"                            \"type\": \"integer\"",
-									"                        },",
-									"                        \"name\": {",
-									"                            \"type\": \"string\"",
-									"                        }",
-									"                    },",
-									"                    \"required\": [\"id\", \"name\"]",
-									"                }",
-									"            },",
-									"            \"status\": {",
-									"                \"type\": \"string\",",
-									"                \"enum\": [\"available\", \"pending\", \"sold\"]",
-									"            }",
-									"        },",
-									"        \"required\": [\"name\", \"photoUrls\"]",
-									"    };",
-									"    pm.response.to.have.jsonSchema(schemaPet);",
-									"});",
-									"",
-									"pm.test(\"Checking values in request headers\", function () {",
-									"    pm.expect(pm.request.headers.get(\"accept\")).to.eql(\"application/json\");",
-									"    pm.expect(pm.request.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
-									"    pm.expect(pm.request.headers.get(\"Cache-Control\")).to.eql(\"no-cache\");",
-									"    pm.expect(pm.request.headers.get(\"Host\")).to.eql(\"petstore.swagger.io\");",
-									"    pm.expect(pm.request.headers.get(\"Connection\")).to.eql(\"keep-alive\");",
-									"});",
-									"",
-									"pm.test(\"Checking values in response headers\", function () {",
-									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
-									"    pm.expect(pm.response.headers.get(\"Connection\")).to.eql(\"keep-alive\");",
-									"    pm.expect(pm.response.headers.get(\"Access-Control-Allow-Origin\")).to.eql(\"*\");",
-									"    pm.expect(pm.response.headers.get(\"Access-Control-Allow-Methods\")).to.eql(\"GET, POST, DELETE, PUT\");",
-									"    pm.expect(pm.response.headers.get(\"Access-Control-Allow-Headers\")).to.eql(\"Content-Type, api_key, Authorization\");",
-									"    pm.expect(pm.response.headers.get(\"Server\")).to.eql(\"Jetty(9.2.9.v20150224)\");",
-									"});",
-									"",
-									"pm.test(\"Status code 200 or 405\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 405]);",
-									"});",
-									"",
-									"pm.test(\"Checking the error message\", function () {",
-									"    if (pm.response.code == 405) {",
-									"        pm.expect(response.massage).to.eql(\"Invalid input\")",
-									"    };",
-									"});",
-									"",
-									"pm.test(\"Request time check\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"});",
-									"",
 									"let requestBody = pm.request.body.raw",
 									"requestBody = JSON.parse(requestBody);",
 									"let responseBody = pm.response.json();",
@@ -170,6 +84,1195 @@
 						"description": "Generated from cURL: curl -X 'POST' \\\n  'https://petstore.swagger.io/v2/pet' \\\n  -H 'accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"id\": 0,\n  \"category\": {\n    \"id\": 0,\n    \"name\": \"string\"\n  },\n  \"name\": \"doggie\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}'"
 					},
 					"response": []
+				},
+				{
+					"name": "ID-02",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking required fields in the response body\", function (){",
+									"let requiredFields = [\"id\",\"name\",\"photoUrls\"];",
+									"pm.expect(Object.keys(responseBody)).to.eql(requiredFields);",
+									"});",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Yani\",\n    \"photoUrls\": [\n        \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNDw1-TmyZADFQAAAAAdAAAAABAE\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\n  'https://petstore.swagger.io/v2/pet' \\\n  -H 'accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"id\": 0,\n  \"category\": {\n    \"id\": 0,\n    \"name\": \"string\"\n  },\n  \"name\": \"doggie\",\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "ID-03",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Checking for the presence of the ID field in the response body\", function(){",
+									"let responseBody = pm.response.json();",
+									"pm.expect(responseBody).to.not.have.property(\"id\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": {\n    \"id\": 11,\n    \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-04",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"klon\",  \n  \"category\": {\n    \"id\": 11,\n    \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-05",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": null,  \n  \"category\": {\n    \"id\": 11,\n    \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-06",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Check the value in the id field, id is not equal to 0\", function(){",
+									"  pm.expect(responseBody.id).to.not.eql(0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 0,  \n  \"category\": {\n    \"id\": 11,\n    \"name\": \"Rabbits\"\n  },\n  \"name\": \"Lori\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"adult\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-07",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1.5,  \n  \"category\": {\n    \"id\": 11,\n    \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-08",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking that the “id” field is absent in the “category” object\", function(){",
+									"    pm.expect(responseBody.category).to.not.have.property(\"id\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n   \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-09",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": null,\n   \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-10",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking for a value of 0 in the id field in the category object\", function(){",
+									"    pm.expect(responseBody.category.id).to.eql(0);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": 0,\n   \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-11",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": 0.6,\n   \"name\": \"Cats\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-12",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": 12,\n   \"name\": 2\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-13",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": 12,\n   \"name\": null\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-14",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking for an empty value in the name field in the category object\", function(){",
+									"    pm.expect(responseBody.category.name).to.eql(\"\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": 12,\n   \"name\": \"\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-15",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking that the name field is absent in the category object\", function (){",
+									"    pm.expect(responseBody.category).to.not.have.property(\"name\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": 12\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-16",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"category\": {\n  \"id\": 12,\n   \"name\": \"Tresvis\",\n   \"last name\" : \"Jobi\"\n  },\n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-17",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking for absence of object category\", function(){",
+									"    pm.expect(responseBody).to.not.have.property(\"category\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 91984134043,  \n  \"name\": \"Sofia\",\n  \"photoUrls\": [\n    \"https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fdog%2F&psig=AOvVaw2y2phPpqANrB615QJQ2GnW&ust=1761840855782000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCODu_I-_y5ADFQAAAAAdAAAAABAK\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 12,\n      \"name\": \"puppies\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-18",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking for an empty value in the name field\", function (){",
+									"    pm.expect(responseBody.name).to.eql(\"\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"\",\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-19",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": null,\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-20",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking for a null string value in the name field\", function(){",
+									"    pm.expect(responseBody.name).to.eql(\"null\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"null\",\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-21",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-22",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"Name\": \"{{$randomFirstName}}\",\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-23",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"let petName = responseBody.name;",
+									"",
+									"pm.test(\"Checking the lower case of the value in the name field\", function(){",
+									"pm.expect(petName).to.eql(petName.toLowerCase());",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"alisa\",\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-24",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"let petName = responseBody.name;",
+									"",
+									"pm.test(\"Checking the lower case of the value in the name field\", function(){",
+									"  let partOfName = petName.charAt(0).toUpperCase() + petName.slice(1).toLowerCase();",
+									"  pm.expect(petName).to.eql(partOfName);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"Alisa\",\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-25",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking the data type value in the photoUrls array\", function(){",
+									"  pm.expect(responseBody.photoUrls).to.be.a(\"array\");",
+									"  responseBody.photoUrls.forEach((item) => {            ",
+									"    pm.expect(item).to.be.a(\"string\");",
+									"  });",
+									"  });"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"{{$randomFirstName}}\",\n  \"photoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-26",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseBody = pm.response.json();",
+									"",
+									"pm.test(\"Checking for duplicate values in an array\", function(){",
+									"pm.expect(responseBody.photoUrls).to.be.a(\"array\");",
+									"",
+									"let uniqueValue = new Set (responseBody.photoUrls);",
+									"",
+									"pm.expect(uniqueValue.size).to.be.below(responseBody.photoUrls.length);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"{{$randomFirstName}}\",\n  \"photoUrls\": [\n    \"http://placeimg.com/640/480\", \n    \"http://placeimg.com/640/480\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							"pm.request.headers.add({",
+							"  key: \"accept\",",
+							"  value: \"application/json\"",
+							"});",
+							"",
+							"pm.request.headers.add({",
+							"  key: \"Content-Type\",",
+							"  value: \"application/json\"",
+							"});",
+							"",
+							"pm.request.headers.add({",
+							"  key: \"Host\",",
+							"  value: \"petstore.swagger.io\"",
+							"});",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
