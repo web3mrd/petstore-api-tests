@@ -1235,6 +1235,188 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ID-27",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"{{$randomFirstName}}\",\n  \"photoUrls\": [],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-28",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"{{$randomFirstName}}\",\n  \"photoUrls\": [\n    null\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-29",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"{{$randomFirstName}}\",\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID-30",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check status code 405\", function(){",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"Checking the value in the message field\", function(){",
+									"    pm.expect(responseBody.message).to.eql(\"Invalid input\");",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": {{$randomInt}},  \n  \"category\": {\n  \"id\": {{$randomInt}},\n   \"name\": \"{{$randomFirstName}}\"\n  },\n  \"name\": \"{{$randomFirstName}}\",\n  \"PhotoUrls\": [\n    \"{{$randomImageUrl}}\"\n  ],\n  \"tags\": [\n    {\n      \"id\": {{$randomInt}},\n      \"name\": \"{{$randomDomainWord}}\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
